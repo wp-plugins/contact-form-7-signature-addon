@@ -1,10 +1,11 @@
 === Contact Form 7 Signature field ===
 Plugin URI: http://www.breizhtorm.fr/blog/
 Contributors: tameroski
+Version: 1.0.1
 Tags: Contact Form 7, form, forms, contactform7, contact form, signature pad, sig, signature field, cf7, handwriting, write
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Adds a new field type to Contact Form 7 that allow users to submit an handwritten signature.
 
