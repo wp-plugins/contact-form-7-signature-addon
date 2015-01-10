@@ -52,7 +52,6 @@ function wpcf7_signature_shortcode_handler( $tag ) {
 
 	// loading signature javascript
 	wp_enqueue_script('signature-pad',plugins_url( 'signature_pad.min.js' , __FILE__ ),array(),'1.0',false);
-	wp_enqueue_script('signature',plugins_url( 'signature.js' , __FILE__ ),array(),'1.0',false);
 
 	$tag = new WPCF7_Shortcode( $tag );
 
@@ -107,9 +106,21 @@ function wpcf7_signature_shortcode_handler( $tag ) {
 	//print_r($tag);
 
 	$html = sprintf(
-		'<span class="wpcf7-form-control-wrap %1$s"><input %2$s id="%4$s"/>%3$s
-		<canvas id="wpcf7_signature" class="%4$s" width="%5$s" height="%6$s"></canvas><input id="%4$s_clear" type="button" value="%7$s"/></span>',
+		'<span class="wpcf7-form-control-wrap %1$s"><input %2$s id="wpcf7_%4$s_input"/>%3$s
+		<canvas id="wpcf7_%4$s_signature" class="%4$s" width="%5$s" height="%6$s"></canvas><input id="#wpcf7_%4$s_clear" type="button" value="%7$s"/></span>',
 		sanitize_html_class( $tag->name ), $atts, $validation_error, $tag->name, $width, $height, __( 'Clear', 'wpcf7-signature' ) );
+
+	// script needs to be added for each signature field
+	$html .= '<script type="text/javascript">';
+	$html .= 'document.addEventListener("DOMContentLoaded", function(){';
+	$html .= 'var canvas = document.querySelector("#wpcf7_'.$tag->name.'_signature");';
+	$html .= 'var signaturePad = new SignaturePad(canvas);';
+	$html .= 'document.getElementById("#wpcf7_'.$tag->name.'_clear").addEventListener("click", function(){signaturePad.clear();});';
+	$html .= 'var input = document.querySelector("#wpcf7_'.$tag->name.'_input");';
+	$html .= 'var submit = document.querySelector("input.wpcf7-submit");';
+	$html .= 'submit.onclick = function(){if (!signaturePad.isEmpty()){input.value = signaturePad.toDataURL();}else{input.value = "";}}';
+	$html .= '});';
+	$html .= '</script>';
 
 	return $html;
 }
@@ -155,7 +166,7 @@ function wpcf7_add_tag_generator_signature() {
 		'wpcf7-tg-pane-signature', 'wpcf7_tg_pane_signature' );
 }
 
-function wpcf7_tg_pane_signature( &$contact_form ) {
+function wpcf7_tg_pane_signature( ) {
 
 ?>
 <div id="wpcf7-tg-pane-signature" class="hidden">
