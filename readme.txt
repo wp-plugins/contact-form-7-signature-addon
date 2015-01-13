@@ -27,7 +27,7 @@ This plugin requires the Contact Form 7 plugin.
 5. Follow the instructions on the page
 
 If you want the signature image to be included in the body of your mails, just put an image tag which src attribute is set to be the content of your field, just like this :
-<img src="[your-signature-field]"/>
+`<img src="[your-signature-field]"/>`
 
 Your contact form needs to send HTML messages, of course.
 
