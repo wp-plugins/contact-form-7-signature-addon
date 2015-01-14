@@ -32,9 +32,11 @@ If you want the signature image to be included in the body of your mails, just p
 Your contact form needs to send HTML messages, of course.
 
 Please note that the plugin uses base 64 encoded embedded images at the moment, which is not very well supported by mail clients. It should be fine at least with :
+
 * Apple/iOS Mail
 * Outlook 2003
 * Android Default Mail client
+
 And maybe others after changing some default settings
 
 And voilà!
