@@ -46,7 +46,7 @@ Important note : since version 2.0, the plugin no longer uses inline base64 enco
 
 == Changelog ==
 
-= 2.0 =
+= 2.1 =
 * Fixed a bug where only the last signature of a form was sent
 
 = 2.0 =
