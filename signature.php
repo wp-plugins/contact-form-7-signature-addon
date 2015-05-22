@@ -212,7 +212,7 @@ function wpcf7_manage_signature ($posted_data) {
 	$dir = "/signatures";
 
 	foreach ($posted_data as $key => $data) {
-		if (strrpos($data, "data:image/png;base64", -strlen($data)) !== FALSE){
+		if (is_string($data) && strrpos($data, "data:image/png;base64", -strlen($data)) !== FALSE){
 	        $data_pieces = explode(",", $data);
 	        $encoded_image = $data_pieces[1];
 	        $decoded_image = base64_decode($encoded_image);
