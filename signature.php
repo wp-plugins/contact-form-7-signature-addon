@@ -5,7 +5,7 @@ Plugin URI:
 Description: Add signature field type to the popular Contact Form 7 plugin.
 Author: Breizhtorm
 Author URI: http://www.breizhtorm.fr
-Version: 2.2
+Version: 2.3
 */
 
 // this plugin needs to be initialized AFTER the Contact Form 7 plugin.
@@ -205,34 +205,43 @@ function wpcf7_tg_pane_signature( ) {
 */
 function wpcf7_manage_signature ($posted_data) {
 
-	$dir = "/signatures";
-
 	foreach ($posted_data as $key => $data) {
 		if (is_string($data) && strrpos($data, "data:image/png;base64", -strlen($data)) !== FALSE){
+
+			// Getting signature raw data
 	        $data_pieces = explode(",", $data);
 	        $encoded_image = $data_pieces[1];
 	        $decoded_image = base64_decode($encoded_image);
 
+	        // Checking for directories
+	        $dir = "/wpcf7_signatures";
 	        $upload_dir = wp_upload_dir();
 	        $signature_dir = $upload_dir['basedir'].$dir;
 	        $signature_dir_url = $upload_dir['baseurl'].$dir;
+	        if (! is_dir($signature_dir)) {
+		    	if (! mkdir( $signature_dir, 0700 )){
+		    		error_log("Cannot create signatures directory at location : ".$signature_dir);
+		    	}
+		    }
 
-	        if( ! file_exists( $signature_dir ) ){
-	    		wp_mkdir_p( $signature_dir );
-	        }
-
+			// Getting a unique filename
 	        $filename = $key."-".time().".png";
-	        $filepath = $signature_dir."/".$filename;
+			$filename = wpcf7_canonicalize( $filename );
+			$filename = sanitize_file_name( $filename );
+			$filename = wpcf7_antiscript_file_name( $filename );
+			$filename = wp_unique_filename( $uploads_dir, $filename );
 
-	        file_put_contents( $filepath,$decoded_image);
+			$new_file = trailingslashit( $signature_dir ) . $filename;
+			$new_file_url = trailingslashit( $signature_dir_url ) . $filename;
 
-	        if (file_exists($filepath)){
+			// Putting the data into the file
+	        file_put_contents( $new_file,$decoded_image);
+
+	        if (file_exists($new_file) && filesize($new_file) > 0){
 	        	// File created : changing posted data to the URL instead of base64 encoded image data
-	        	$fileurl = $signature_dir_url."/".$filename;
-	        	
-        		$posted_data[$key] = $fileurl;
+        		$posted_data[$key] = $new_file_url;
 	        }else{
-	        	error_log("Cannot create signature file in directory ".$filepath);
+	        	error_log("Cannot create signature file at location : ".$new_file);
 	        }
 		}
 	}

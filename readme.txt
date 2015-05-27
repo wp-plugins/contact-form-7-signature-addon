@@ -4,7 +4,7 @@ Contributors: tameroski
 Tags: Contact Form 7, form, forms, contactform7, contact form, signature pad, sig, signature field, cf7, handwriting, write
 Requires at least: 3.9
 Tested up to: 4.2
-Stable tag: 2.2
+Stable tag: 2.3
 
 Adds a new field type to Contact Form 7 that allow users to submit an handwritten signature.
 
@@ -35,7 +35,7 @@ If you want the signature image to be included in the body of your emails, just 
 
 Your contact form needs to send **HTML formatted** messages for it to work properly, so don't forget to check the corresponding box at the bottom of your email settings.
 
-Important note : since version 2.0, the plugin no longer uses inline base64 encoded images, and signature images are saved to a "signatures/" subdir of your wordpress upload directory. So every email clients compatibility issues should be gone !
+Important note : since version 2.0, the plugin no longer uses inline base64 encoded images, and signature images are saved to your wordpress upload directory. So every email clients compatibility issues should be gone !
 
 == Screenshots ==
 
@@ -52,6 +52,10 @@ Then verify that the image is wrapped in an HTML image tag in your mail configur
 `<img src="[your-signature-field]"/>`
 
 == Changelog ==
+
+= 2.3 =
+* Using a slightly different method for storing files
+* Fixed a bug with signature clearing and form validation
 
 = 2.2 =
 * Fixed a bug where CF7 form submission was blocked sometimes
