@@ -7,7 +7,7 @@ Tested up to: 4.2
 Stable tag: 2.3
 
 Adds a new field type to Contact Form 7 that allow users to submit an handwritten signature.
-Important note : v2.3 or higher is meant to work with CF7 4.2 or higher. Do not update to 2.3 unless you update CF7 to 4.2.
+**Important note** : v2.3 or higher is meant to work with CF7 4.2 or higher. Do not update to 2.3 unless you update CF7 to 4.2.
 
 == Description ==
 
@@ -36,9 +36,9 @@ If you want the signature image to be included in the body of your emails, just 
 
 Your contact form needs to send **HTML formatted** messages for it to work properly, so don't forget to check the corresponding box at the bottom of your email settings.
 
-Important note : since version 2.0, the plugin no longer uses inline base64 encoded images, and signature images are saved to your wordpress upload directory. So every email clients compatibility issues should be gone !
+**Important note** : since version 2.0, the plugin no longer uses inline base64 encoded images, and signature images are saved to your wordpress upload directory. So every email clients compatibility issues should be gone !
 
-Super important note : Version 2.3 is only meant to work with CF7 v4.2 and higher. Keep a good old 2.2 version of the plugin if don't have CF7 4.2 or higher installed.
+**Super important note** : Version 2.3 is only meant to work with CF7 v4.2 and higher. Keep a good old 2.2 version of the plugin if don't have CF7 4.2 or higher installed.
 
 == Screenshots ==
 
