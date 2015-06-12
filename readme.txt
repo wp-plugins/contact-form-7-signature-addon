@@ -7,7 +7,7 @@ Tested up to: 4.2
 Stable tag: 2.3
 
 Adds a new field type to Contact Form 7 that allow users to submit an handwritten signature.
-**Important note** : v2.3 or higher is meant to work with CF7 4.2 or higher. Do not update to 2.3 unless you update CF7 to 4.2.
+Version 2.3 is meant to work with CF7 4.2 or higher. Do not update to 2.3 unless you update CF7 to 4.2.
 
 == Description ==
 
