@@ -6,8 +6,8 @@ Requires at least: 3.9
 Tested up to: 4.2
 Stable tag: 2.3
 
-Adds a new field type to Contact Form 7 that allow users to submit an handwritten signature.
-Version 2.3 is meant to work with CF7 4.2 or higher. Do not update to 2.3 unless you update CF7 to 4.2.
+Adds an handwritten signature field type to Contact Form 7.
+Version 2.3 is for CF7 4.2 or higher only. Keep version 2.2 otherwise.
 
 == Description ==
 
@@ -16,6 +16,7 @@ Version 2.3 is meant to work with CF7 4.2 or higher. Do not update to 2.3 unless
 This plugin adds a new field type to the Contact Form 7 plugin and allows users to add an handwritten signature to the message via a signature pad. The plugin uses a Javascript library (https://github.com/szimek/signature_pad).
 
 This plugin requires version 3.9 or higher of the "Contact Form 7" plugin.
+**Version 2.3 of this plugin is for CF7 4.2 or higher only. Use version 2.2 otherwise.**
 
 Please read the installation notes for more details.
 
