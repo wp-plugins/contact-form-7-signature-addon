@@ -6,8 +6,7 @@ Requires at least: 3.9
 Tested up to: 4.2
 Stable tag: 2.3
 
-Adds an handwritten signature field type to Contact Form 7.
-Version 2.3 is for CF7 4.2 or higher only. Keep version 2.2 otherwise.
+Easily add an handwritten signature field to Contact Form 7
 
 == Description ==
 
@@ -17,9 +16,9 @@ This plugin adds a new field type to the Contact Form 7 plugin and allows users 
 
 = Important Note =
 This plugin requires version 3.9 or higher of the "Contact Form 7" plugin.
-Version 2.3 of this plugin is for CF7 4.2 or higher only. Use version 2.2 otherwise.
+Version 2.3 of this plugin is for CF7 4.2 or higher only. Use [version 2.2](http://downloads.wordpress.org/plugin/contact-form-7-signature-addon.2.2.zip) otherwise.
 
-Please read the installation notes for more details.
+Please read the [installation notes](http://wordpress.org/plugins/contact-form-7-signature-addon/installation/) for more details.
 
 Don't forget to rate the plugin if you like it (or not).
 
