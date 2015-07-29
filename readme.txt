@@ -60,7 +60,7 @@ Then verify that the image is wrapped in an HTML image tag in your mail configur
 Use CSS like you could do for the rest of the form, using the field's id and classes. For example, if your field name is "signature-test", you can do something like this : 
 `
 .signature-test canvas{
-	border: 1px dottef #BADA55;
+	border: 1px dotted #BADA55;
 }
 `
 
