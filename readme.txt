@@ -1,4 +1,4 @@
-=== Contact Form 7 Signature field ===
+=== Contact Form 7 Signature Addon ===
 Plugin URI: http://www.breizhtorm.fr/blog/
 Contributors: tameroski
 Tags: Contact Form 7, form, forms, contactform7, contact form, signature pad, sig, signature field, cf7, handwriting, write
@@ -15,8 +15,9 @@ Version 2.3 is for CF7 4.2 or higher only. Keep version 2.2 otherwise.
 
 This plugin adds a new field type to the Contact Form 7 plugin and allows users to add an handwritten signature to the message via a signature pad. The plugin uses a Javascript library (https://github.com/szimek/signature_pad).
 
+= Important Note =
 This plugin requires version 3.9 or higher of the "Contact Form 7" plugin.
-**Version 2.3 of this plugin is for CF7 4.2 or higher only. Use version 2.2 otherwise.**
+Version 2.3 of this plugin is for CF7 4.2 or higher only. Use version 2.2 otherwise.
 
 Please read the installation notes for more details.
 
@@ -52,7 +53,7 @@ Your contact form needs to send **HTML formatted** messages for it to work prope
 
 First things first : verify that your email is sent in HTML format. In CF7, theres's a checkbox at the bottom of each mail configuration to do that.
 
-Then verify that the image is wrapped in an HTML image tag in your mail configuration, like this : 
+Then verify that the image is wrapped in an HTML image tag in your mail configuration, like this :
 `<img src="[your-signature-field]"/>`
 
 == Changelog ==
