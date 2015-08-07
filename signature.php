@@ -5,7 +5,7 @@ Plugin URI:
 Description: Add signature field type to the popular Contact Form 7 plugin.
 Author: Breizhtorm
 Author URI: http://www.breizhtorm.fr
-Version: 2.4.1
+Version: 2.4.2
 */
 
 // this plugin needs to be initialized AFTER the Contact Form 7 plugin.
@@ -43,6 +43,7 @@ function wpcf7_signature_shortcode_handler( $tag ) {
 
 	// loading signature javascript
 	wp_enqueue_script('signature-pad',plugins_url( 'signature_pad.min.js' , __FILE__ ),array(),'1.0',false);
+	wp_enqueue_script('signature-scrips',plugins_url( 'scripts.js' , __FILE__ ),array(),'1.0',false);
 
 	$tag = new WPCF7_Shortcode( $tag );
 
@@ -106,7 +107,7 @@ function wpcf7_signature_shortcode_handler( $tag ) {
 	$html .= 'document.addEventListener("DOMContentLoaded", function(){';
 	$html .= 'var canvas_'.$sigid.' = document.querySelector("#wpcf7_'.$tag->name.'_signature");';
 	$html .= 'var signaturePad_'.$sigid.' = new SignaturePad(canvas_'.$sigid.');';
-	$html .= 'document.getElementById("#wpcf7_'.$tag->name.'_clear").addEventListener("click", function(){signaturePad_'.$sigid.'.clear();input_'.$sigid.'.value = "";});';
+	$html .= 'document.getElementById("#wpcf7_'.$tag->name.'_clear").addEventListener("click", function(){sigFieldClear("'.$tag->name.'");});';
 	$html .= 'var input_'.$sigid.' = document.querySelector("#wpcf7_'.$tag->name.'_input");';
 	$html .= 'var submit = document.querySelector("input.wpcf7-submit");';
 	$html .= 'submit.addEventListener("click", function(){if (!signaturePad_'.$sigid.'.isEmpty()){input_'.$sigid.'.value = signaturePad_'.$sigid.'.toDataURL();}else{input_'.$sigid.'.value = "";}}, false)';
@@ -149,6 +150,30 @@ function wpcf7_signature_validation_filter( $result, $tag ) {
 
 	return $result;
 }
+
+/* Adding a Javascript callback to form validation, so we can clear the signature fields */
+
+function filter_wpcf7_contact_form_properties( $properties, $instance ) 
+{
+   	if (! is_array($properties)){
+   		return $properties;
+   	}
+
+   	$JSCallback = "clearSignatures();";
+   	$settings = $properties['additional_settings'];
+   	$pos = strrpos($settings, ";");
+    if($pos !== false)
+    {
+        $settings = substr_replace($settings, $JSCallback, $pos + 1, 0);
+    }else{
+    	$settings = "on_sent_ok:\"".$JSCallback."\"";
+    }
+
+   	$properties['additional_settings'] = $settings;
+
+    return $properties;
+};
+add_filter( 'wpcf7_contact_form_properties', 'filter_wpcf7_contact_form_properties', 10, 2 );
 
 /* Tag generator */
 
