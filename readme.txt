@@ -3,8 +3,8 @@ Plugin URI: http://www.breizhtorm.fr/blog/
 Contributors: tameroski
 Tags: Contact Form 7, form, forms, contactform7, contact form, signature pad, sig, signature field, cf7, handwriting, write
 Requires at least: 3.9
-Tested up to: 4.2
-Stable tag: 2.4.1
+Tested up to: 4.3
+Stable tag: 2.6
 
 Easily add an handwritten signature field to Contact Form 7
 
@@ -14,10 +14,20 @@ Easily add an handwritten signature field to Contact Form 7
 
 This plugin adds a new field type to the Contact Form 7 plugin and allows users to add an handwritten signature to the message via a signature pad. The plugin uses Szymon Nowak's great Javascript library (https://github.com/szimek/signature_pad).
 
-= Important Note =
-This plugin requires version 3.5 or higher of the "Contact Form 7" plugin.
+= News =
+Version 2.6 is out, finally adding support for HDPi and Retina screens. Be careful though, as i had to refactor things a bit, specially field layout and classes attributes. You might have to update your field's custom CSS!
 
-Please read the [installation notes](http://wordpress.org/plugins/contact-form-7-signature-addon/installation/) for more details.
+= Compatibility =
+This plugin requires version 3.5 or higher of the "Contact Form 7" plugin.
+It should work on almost every modern web and mobile browser (IE9+, ...).
+
+= Installation / Support =
+Please read the [installation notes](http://wordpress.org/plugins/contact-form-7-signature-addon/installation/) for details.
+
+You can ask for support [here](http://wordpress.org/support/plugin/contact-form-7-signature-addon), and if you're new to web development and Wordpress things, i think you should have a look at [this article](http://www.wpbeginner.com/beginners-guide/how-to-properly-ask-for-wordpress-support-and-get-it/) first.
+
+= Be kind =
+This plugin is just sharing the result of something i needed once for a project, there's nothing commercial in there. But i'll listen to your requests and do my best to keep the plugin up to date anyway.
 
 Don't forget to rate the plugin if you like it (or not).
 
@@ -57,12 +67,45 @@ Then verify that the image is wrapped in an HTML image tag in your mail configur
 Use CSS like you would do for any other field in your form. 
 For example, using the field wrapper, you can add a border like this : 
 `
-.wpcf7-form-control-signature-wrap canvas{
+.wpcf7-form-control-signature-body canvas{
 	border: 1px dotted #BADA55;
 }
 `
 
+= How do i make my signature field responsive ? =
+
+It depends on your form layout but once again, you can do this by using basic CSS instructions. The plugin will deal with window size and device orientation automatically updating itself to match the right size.
+
+The only thing you have to do is override the field wrapper (not the canvas itself) size like this :
+`
+@media screen and (max-width: 768px) {
+    .wpcf7-form-control-signature-wrap {
+        width:100%;
+    }
+}
+...
+`
+
+= The field is not working well after my desktop browser window was resized or after orientation change on my mobile. How can i fix that ? =
+
+The signature field needs to be "reloaded" too when its container's size changes, but you should be aware that it will also clear its content. I assume this is your responsability to do so. The plugin provides a javascript function that you can call from your theme's Javascript in order to do that :
+`
+window.onresize = sigFieldsResize;
+`
+
 == Changelog ==
+
+= 2.6 =
+* REALLY fixed the device ratio bug on HDPi devices like iPads
+* Fixed a major issue with 2.5 where the field was "growing" on window resize (facepalm)
+* Refactored field layout
+
+= 2.5 =
+* Updated signature pad library to v1.4.0
+* Fixed a bug with device ratio not being properly taken into account sometimes
+* Fixed a bug where signature fields were not cleared after successful submit
+* Fixed a bug where cleared signature fields were not correctly validating
+* Refactored JavaScript for easier plugin maintenance
 
 = 2.4.1 =
 * Fixed a major issue where mandatory signature fields were note validating correctly (since CF7 4.1)
