@@ -95,6 +95,10 @@ window.onresize = sigFieldsResize;
 
 == Changelog ==
 
+= 2.6.1 =
+* Bugfix : additional settings JS callback was called once more each time the form settings were submitted
+* Bugfix : fixed an issue with submit buttons when there's more than one form in a page
+
 = 2.6 =
 * REALLY fixed the device ratio bug on HDPi devices like iPads
 * Fixed a major issue with 2.5 where the field was "growing" on window resize (facepalm)
