@@ -163,20 +163,33 @@ function filter_wpcf7_contact_form_properties( $properties, $instance )
    		return $properties;
    	}
 
-   	$JSCallback = "sigFieldsClear();";
-   	$settings = $properties['additional_settings'];
-   	$pos = strrpos($settings, ";");
+   	// We need to know if the current form has a signature field
+   	$manager = WPCF7_ShortcodeManager::get_instance();
+   	$scanned = $manager->scan_shortcode( $properties['form'] );
 
-    if(!strpos($settings, $JSCallback) !== false){
-    	if($pos !== false)
-	    {
-	        $settings = substr_replace($settings, $JSCallback, $pos + 1, 0);
-	    }else{
-	    	$settings = "on_sent_ok:\"".$JSCallback."\"";
-	    }
-    }
+   	if ( empty( $scanned ) )
+			return $properties;
 
-   	$properties['additional_settings'] = $settings;
+	for ( $i = 0, $size = count( $scanned ); $i < $size; $i++ ) {
+		if ( !empty( $scanned[$i]) && $scanned[$i]['basetype'] == "signature"){
+			// We got one !
+			//Let's add the callback if needed
+		   	$JSCallback = "sigFieldsClear();";
+		   	$settings = $properties['additional_settings'];
+		   	$pos = strrpos($settings, ";");
+
+		    if(!strpos($settings, $JSCallback) !== false){
+		    	if($pos !== false)
+			    {
+			        $settings = substr_replace($settings, $JSCallback, $pos + 1, 0);
+			    }else{
+			    	$settings = "on_sent_ok:\"".$JSCallback."\"";
+			    }
+		    }
+
+		   	$properties['additional_settings'] = $settings;
+		}
+	}
 
     return $properties;
 };
