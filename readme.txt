@@ -4,7 +4,7 @@ Contributors: tameroski
 Tags: Contact Form 7, form, forms, contactform7, contact form, signature pad, sig, signature field, cf7, handwriting, write
 Requires at least: 3.9
 Tested up to: 4.3
-Stable tag: 2.6.2
+Stable tag: 2.6.5
 
 Easily add an handwritten signature field to Contact Form 7
 
@@ -23,7 +23,7 @@ This plugin requires version 3.5 or higher of the "Contact Form 7" plugin.
 It should work on almost every modern web and mobile browser (IE9+, ...).
 
 = Installation / Support =
-Please read the [installation notes](http://wordpress.org/plugins/contact-form-7-signature-addon/installation/) for details.
+Please read the [installation notes](http://wordpress.org/plugins/contact-form-7-signature-addon/installation/) and [FAQ](http://wordpress.org/plugins/contact-form-7-signature-addon/faq/) for details.
 
 You can ask for support [here](http://wordpress.org/support/plugin/contact-form-7-signature-addon), and if you're new to web development and Wordpress things, i think you should have a look at [this article](http://www.wpbeginner.com/beginners-guide/how-to-properly-ask-for-wordpress-support-and-get-it/) first.
 
@@ -47,7 +47,7 @@ If you want the signature image to be included in the body of your emails, just 
 
 Your contact form needs to send **HTML formatted** messages for it to work properly, so don't forget to check the corresponding box at the bottom of your email settings.
 
-**Important note** : since version 2.0, the plugin no longer uses inline base64 encoded images, and signature images are saved to your wordpress upload directory. So every email clients compatibility issues should be gone !
+**Important note** : Plugin scripts are loaded in the footer, so your theme **MUST** be using the [wp_footer()](http://codex.wordpress.org/Plugin_API/Action_Reference/wp_footer) template tag for the signature field to work properly.
 
 == Screenshots ==
 
@@ -63,6 +63,17 @@ First things first : verify that your email is sent in HTML format. In CF7, ther
 Then verify that the image is wrapped in an HTML image tag in your mail configuration, like this :
 `<img src="[your-signature-field]"/>`
 
+= How can i customize my signature field =
+
+When building your signature field with CF7's field generator, you have several options you can add to the field shortcode.
+
+Width and height :
+`[signature signature-666 333x222]`
+Will tell the plugin to draw the field 333px wide and 222px tall.
+
+ID and class :
+`[signature signature-666 id:foo class:bar]`
+
 = How do i add styles to my signature field ? =
 
 Use CSS like you would do for any other field in your form. 
@@ -77,7 +88,7 @@ For example, using the field wrapper, you can add a border like this :
 
 It depends on your form layout but once again, you can do this by using basic CSS instructions. The plugin will deal with window size and device orientation automatically updating itself to match the right size.
 
-The only thing you have to do is override the field wrapper (not the canvas itself) size like this :
+The only thing you have to do is apply width and/or height styles *to the field wrapper, not the canvas*, like this :
 `
 @media screen and (max-width: 768px) {
     .wpcf7-form-control-signature-wrap {
@@ -95,6 +106,17 @@ window.onresize = sigFieldsResize;
 `
 
 == Changelog ==
+
+= 2.6.5 =
+* Changed the way plugin assets are loaded
+* Added a note about the plugin to require wp_footer() in the theme.
+* Removed unused action call
+
+= 2.6.4 =
+* Plugin scripts are now loaded in the footer in order to prevent DOM loading issues.
+
+= 2.6.3 =
+* Bugfix : Shortcode options "id:" and "class:" were not taken into account
 
 = 2.6.2 =
 * Automatically get rid of rubbish JS added through 2.5 & 2.6 versions, so plugin users won't have to do it
